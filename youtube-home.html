@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://www.logo.wine/a/logo/YouTube/YouTube-Icon-Full-Color-Logo.wine.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>YouTube</title>
+    <style>
+        #overall {
+            display: grid;
+            grid-template-columns: 7% 80%;
+            grid-gap: 2%;
+            justify-content: center;
+            justify-content: space-evenly;
+            margin-top: 30px;
+
+
+        }
+
+        #menu {
+            justify-content: left;
+
+
+        }
+
+        #search_results {
+            display: grid;
+            grid-template-columns: repeat(4, 20%);
+            grid-gap: 2%;
+            justify-content: center;
+            justify-content: space-evenly;
+            margin-top: 5px;
+            border-left: 2px solid rgb(168, 162, 162);
+
+        }
+
+        /* #iframe-id {
+            width: 460px;
+            height: 260px;
+        } */
+        /* iframe{
+            border-radius: 5px;
+        } */
+        .input-class {
+            width: 400px;
+            height: 20px;
+            padding: 10px;
+            border-radius: 1px;
+            margin-left: 22%;
+            margin-top: 0px;
+
+
+
+
+
+        }
+
+        #btn {
+            background-color: rgb(250, 250, 250);
+            padding: 12px;
+            width: 70px;
+            height: 44px;
+            margin-left: -5px;
+            margin-top: 0px;
+
+
+        }
+
+        #nav {
+            height: 80px;
+            display: flex;
+            border-bottom: 1px solid rgb(173, 165, 165);
+
+        }
+
+        .img1 {
+            margin-top: -15px;
+            width: 100px;
+            height: 70px;
+        }
+
+        .img2 {
+            margin-top: 0px;
+            width: 60px;
+            height: 40px;
+        }
+
+        .img0 {
+            margin-left: 25px;
+            margin-top: 0px;
+            width: 70px;
+            height: 50px;
+            border-radius: 50%
+        }
+
+        #btn2 {
+            background-color: rgb(250, 250, 250);
+
+
+            margin-left: 23px;
+            font-size: 23px;
+            margin-top: 10px;
+
+
+        }
+
+        #mic {
+            background-color: rgb(250, 250, 250);
+            margin-left: 25px;
+            height: 48px;
+            width: 60px;
+            border-radius: 50%;
+
+        }
+
+        #vid {
+            margin-left: 200px;
+
+
+            font-size: 23px;
+            margin-top: 10px;
+        }
+
+        #vid2 {
+
+
+            margin-left: 25px;
+            font-size: 23px;
+            margin-top: 10px;
+        }
+
+        #vid3 {
+
+
+            margin-left: 25px;
+            font-size: 23px;
+            margin-top: 10px;
+        }
+
+        .icons {
+            font-size: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="nav">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNp4VNGwRTuBm0CtFOrZgIbycSk8oelwuYK9n94ayQf6jNU5vPiWbdGLhvJ4va7ZUe_Z0&usqp=CAU"
+            class="img2" alt="">
+        <img src="https://www.theindianwire.com/wp-content/uploads/2017/08/youtube_logo_new_official_1504077880072.jpg"
+            class="img1" alt="">
+        <input type="text" id="search" class="input-class" value="" placeholder="Search">
+        <button onclick="searchVedios()" id="btn"><i class="fa fa-search"></i></button>
+
+
+        <div id="mic"> <i class="fa fa-microphone" id="btn2"></i></div>
+
+        <i class="fa fa-video-camera" id="vid"></i>
+        <i class="fa fa-th" id="vid2"></i>
+        <i class="fa fa-bell" id="vid3"></i>
+
+        <img src="https://sammishra.netlify.app/images/ab2.jpg" class="img0" alt="">
+    </div>
+
+    <div id="overall">
+        <div id="menu">
+
+            <div><i class="material-icons" class="icons">home</i> Home</div><br><br>
+
+            <div><i class="material-icons " class="icons">&#xe87a;</i> Explore</div><br><br>
+            <div><i class="material-icons" class="icons">&#xe064;</i> Subcriptions</div<br><br><br>
+                <hr>
+            </div>
+
+
+
+        </div>
+        <div id="search_results"></div>
+</body>
+
+</html>
+
+<script>
+
+    // api_key = `AIzaSyBzcxvbzGDjfJutuY92jQFMvLDdEOLloPA`;
+    let api_key = `AIzaSyA-kzaDe8HGHCKNIuRwT30ltYIFw-koF14`;
+
+    let search_results_div = document.getElementById("search_results");
+    async function searchVedios() {
+        try {
+
+            var search1 = document.getElementById("search").value;
+            console.log(search1);
+            url = `https://youtube.googleapis.com/youtube/v3/search?q=${search1}&key=${api_key}&type=vedio&maxResults=30&part=snippet`;
+
+
+            let reponse = await fetch(url);
+
+            let data = await reponse.json();
+
+            let array_of_vedios = data.items;
+
+            appendVedios(array_of_vedios)
+            console.log(data);
+        } catch (err) {
+            console.log(err)
+
+        }
+    }
+
+
+    const appendVedios = (arr) => {
+        search_results_div.innerHTML = "";
+
+        arr.forEach(({ snippet, id: { videoId } }) => {
+            // console.log(snippet);
+            let div = document.createElement("div");
+
+            let url = snippet.thumbnails.medium.url;
+
+            let img = document.createElement("img");
+            img.src = url;
+            // console.log(url);
+            let title = snippet.title;
+
+            //     let iframe = document.createElement('iframe');
+            //     iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            //    // iframe.id = iframe-id;
+
+            //    iframe.width="320px";
+            //    iframe.height="200px";
+            //    iframe.style.border_radious="15px";
+            //    iframe.setAttribute("allowfullscreen",true);
+
+            let h4 = document.createElement("h3");
+            h4.innerText = title;
+            let p=document.createElement("h5");
+            p.innerText =snippet.channelTitle;
+
+
+            let p2=document.createElement("p");
+            p2.innerText =snippet.publishTime;
+//publishTime
+
+
+
+            let vedio_data = {
+                snippet,
+                videoId,
+            }
+
+            div.onclick = () => {
+                showVedio(vedio_data);
+               
+            }
+
+
+            div.append(img, h4,p2,p);
+            search_results_div.append(div);
+
+        });
+    };
+
+
+
+    const showVedio = (vedio_data) => {
+        console.log(vedio_data)
+
+
+        localStorage.setItem("clicked_vedio", JSON.stringify(vedio_data));
+        window.open("youtube_vedio.html");
+        // window.location.href="vedio.html";
+        // window.open("demo.html");
+    };
+
+</script>

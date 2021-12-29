@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://www.logo.wine/a/logo/YouTube/YouTube-Icon-Full-Color-Logo.wine.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>YouTube</title>
+    <style>
+
+     
+#nav{
+    height:100px;
+    
+
+}
+#main{
+    display:flex;
+    height:600px;
+
+
+}
+#vedio_details{
+flex:3;
+
+}
+
+#recomendation{
+    flex:1;
+}
+
+#overall {
+            display: grid;
+            grid-template-columns: 7% 80%;
+            grid-gap: 2%;
+            justify-content: center;
+            justify-content: space-evenly;
+            margin-top: 30px;
+
+
+        }
+
+        #menu {
+            justify-content: left;
+
+
+        }
+
+      
+
+     
+        .input-class {
+            width: 400px;
+            height: 20px;
+            padding: 10px;
+            border-radius: 1px;
+            margin-left: 22%;
+            margin-top: 0px;
+
+
+
+
+
+        }
+
+        #btn {
+            background-color: rgb(250, 250, 250);
+            padding: 12px;
+            width: 70px;
+            height: 44px;
+            margin-left: -5px;
+            margin-top: 0px;
+
+
+        }
+
+        #nav {
+            height: 80px;
+            display: flex;
+            border-bottom: 1px solid rgb(173, 165, 165);
+
+        }
+
+        .img1 {
+            margin-top: -15px;
+            width: 100px;
+            height: 70px;
+        }
+
+        .img2 {
+            margin-top: 0px;
+            width: 60px;
+            height: 40px;
+        }
+
+        .img0 {
+            margin-left: 25px;
+            margin-top: 0px;
+            width: 70px;
+            height: 50px;
+            border-radius: 50%
+        }
+
+        #btn2 {
+            background-color: rgb(250, 250, 250);
+
+
+            margin-left: 23px;
+            font-size: 23px;
+            margin-top: 10px;
+
+
+        }
+
+        #mic {
+            background-color: rgb(250, 250, 250);
+            margin-left: 25px;
+            height: 48px;
+            width: 60px;
+            border-radius: 50%;
+
+        }
+
+        #vid {
+            margin-left: 200px;
+
+
+            font-size: 23px;
+            margin-top: 10px;
+        }
+
+        #vid2 {
+
+
+            margin-left: 25px;
+            font-size: 23px;
+            margin-top: 10px;
+        }
+
+        #vid3 {
+
+
+            margin-left: 25px;
+            font-size: 23px;
+            margin-top: 10px;
+        }
+
+        .icons {
+            font-size: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNp4VNGwRTuBm0CtFOrZgIbycSk8oelwuYK9n94ayQf6jNU5vPiWbdGLhvJ4va7ZUe_Z0&usqp=CAU"
+            class="img2" alt="">
+        <img src="https://www.theindianwire.com/wp-content/uploads/2017/08/youtube_logo_new_official_1504077880072.jpg"
+            class="img1" alt="">
+        <input type="text" id="search" class="input-class" value="" placeholder="Search">
+        <button onclick="searchVedios()" id="btn"><i class="fa fa-search"></i></button>
+
+
+        <div id="mic"> <i class="fa fa-microphone" id="btn2"></i></div>
+
+        <i class="fa fa-video-camera" id="vid"></i>
+        <i class="fa fa-th" id="vid2"></i>
+        <i class="fa fa-bell" id="vid3"></i>
+
+        <img src="https://sammishra.netlify.app/images/ab2.jpg" class="img0" alt="">
+    </div>
+
+    <div id="overall">
+        <div id="menu">
+
+            <div><i class="material-icons" class="icons">home</i> Home</div><br><br>
+
+            <div><i class="material-icons " class="icons">&#xe87a;</i> Explore</div><br><br>
+            <div><i class="material-icons" class="icons">&#xe064;</i> Subcriptions</div<br><br><br>
+                <hr>
+            </div>
+
+
+
+        </div>
+        <div id="main">
+    <div id="vedio_details"></div>
+  </div>
+
+</body>
+</html>
+
+<script>
+  let vedio_data=JSON.parse(localStorage.getItem("clicked_vedio"));
+  console.log(vedio_data);
+
+  let iframe = document.createElement('iframe');
+
+  let vedio_div=document.getElementById("vedio_details")
+            iframe.src = `https://www.youtube.com/embed/${vedio_data.videoId}`;
+           // iframe.id = iframe-id;
+
+           iframe.width="80%";
+           iframe.height="80%";
+           iframe.style.border_radious="15px";
+           iframe.setAttribute("allowfullscreen",true);
+         //  iframe.setAttribute("allow")
+
+         let h4 = document.createElement("h3");
+        h4.innerText=vedio_data.snippet.title;
+        let p=document.createElement("h5");
+            p.innerText =vedio_data.snippet.channelTitle;
+
+            let p3=document.createElement("p");
+            p3.innerText =vedio_data.snippet.description;
+            let p2=document.createElement("p");
+            p2.innerText =vedio_data.snippet.publishTime;
+
+           vedio_div.append(iframe,h4,p3,p2,p);
+
+</script>
